@@ -1,24 +1,18 @@
 cmake_minimum_required(VERSION 3.20)
 
+include("cmake/get_cpm.cmake")
+
 project(
     DialogueMaster
     VERSION 0.1
     DESCRIPTION "A dialogue system for games"
-    LANGUAGES CXX
 )
 
-find_package(llama-cpp REQUIRED)
+CPMAddPackage(
+    NAME llama.cpp
+    GIT_TAG b4743
+    GITHUB_REPOSITORY ggml-org/llama.cpp
+    OPTIONS "LLAMA_BUILD_COMMON ON"
+    )
 
-add_executable(DialogueMaster)
-
-target_sources(DialogueMaster
-    PRIVATE
-        src/main.cpp
-)
-
-install(TARGETS DialogueMaster RUNTIME)
-
-file(GLOB MODEL_FILES "${CMAKE_SOURCE_DIR}/models/*")
-install(FILES ${MODEL_FILES} DESTINATION models)
-
-target_link_libraries(DialogueMaster PRIVATE llama-cpp::llama-cpp ${CMAKE_THREAD_LIBS_INIT})
+add_subdirectory(DialogueMaster)
