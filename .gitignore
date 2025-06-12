@@ -1,0 +1,6 @@
+.pytest_cache/
+.venv/
+.vscode/
+results/
+__pycache__/
+chat_history*.json

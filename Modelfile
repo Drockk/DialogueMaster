@@ -1,4 +1,4 @@
-FROM gemma3:27b-it-qat
+FROM llama3.3:latest
 PARAMETER temperature 0.7
 
 SYSTEM """
@@ -6,9 +6,15 @@ SYSTEM """
   Format:
     notification: "<text>"
   Description:
-    Notifications provide various information about game progress and player actions.
-    - HERO: refers to the player's character
-    - NPC: refers to a non-player character
+    Notifications provide various types of information related to the game world, player activity, and system events.
+    They may include:
+      - Quest-related updates (e.g. "QUEST 100 STATUS CHANGED COMPLETED")
+      - Inventory changes (e.g. "ITEM 123 ADDED TO INVENTORY")
+      - Interactions with NPCs (e.g. "NPC 456 TALKED TO HERO")
+      - Environmental or world-state changes (e.g. "The sun went down and it became dark")
+      - System-level or trigger-based events (e.g. "CUTSCENE STARTED", "ACHIEVEMENT UNLOCKED")
+      - Narrative or lore-based context messages (e.g. "A distant howl echoed through the valley")
+    Notifications are used for tracking game state and may influence available dialogs or gameplay logic.
 
   Examples:
     - notification: "QUEST 100 STATUS CHANGED COMPLETED"
